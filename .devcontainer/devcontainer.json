@@ -1,0 +1,22 @@
+{
+  "name": "ai-foundation",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "22"
+    }
+  },
+  "remoteEnv": {
+    "CODEX_SUBAGENTS_DIR": "${containerWorkspaceFolder}/awesome-codex-subagents"
+  },
+  "postCreateCommand": "/bin/bash .devcontainer/scripts/post-create.sh",
+  "postStartCommand": "/bin/bash .devcontainer/scripts/post-start.sh",
+  "forwardPorts": [
+    1455
+  ],
+  "portsAttributes": {
+    "1455": {
+      "label": "Codex auth callback"
+    }
+  }
+}
