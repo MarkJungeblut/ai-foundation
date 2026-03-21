@@ -13,7 +13,7 @@
     "CODEX_SUBAGENTS_DIR": "${containerWorkspaceFolder}/awesome-codex-subagents"
   },
   "postCreateCommand": "/bin/bash .devcontainer/scripts/post-create.sh",
-  "postStartCommand": "/bin/bash .devcontainer/scripts/post-start.sh",
+  "postStartCommand": "/bin/bash .devcontainer/csharp/post-start.sh",
   "forwardPorts": [
     1455
   ],

@@ -7,7 +7,7 @@ This repository includes two development container configurations:
 - [`.devcontainer/devcontainer.json`](.devcontainer/devcontainer.json) for the default general-purpose setup
 - [`.devcontainer/csharp/devcontainer.json`](.devcontainer/csharp/devcontainer.json) for C# development with the .NET SDK and C# editor support
 
-Both containers share the same lifecycle scripts. When a container is created, it installs the OpenAI Codex CLI with `npm install -g @openai/codex`. Each time a container starts, it prepares `https://github.com/VoltAgent/awesome-codex-subagents.git` directly inside the workspace at `$CODEX_SUBAGENTS_DIR`.
+Both containers share the same create-time setup. On startup, the default container runs the shared startup script, while the C# container runs a C#-specific startup wrapper that also activates the `dotnet-service` profile when appropriate. Both still prepare `https://github.com/VoltAgent/awesome-codex-subagents.git` directly inside the workspace at `$CODEX_SUBAGENTS_DIR`.
 
 ### 1. Open the project in the dev container
 
@@ -24,14 +24,22 @@ The default container uses Ubuntu 24.04 and Node.js 22. The C# container adds th
 
 ### 2. Wait for the container setup to finish
 
-Both containers use the same two lifecycle steps:
+The containers use the same create-time step:
 
 ```bash
 postCreateCommand: /bin/bash .devcontainer/scripts/post-create.sh
 ```
 
+The default container uses:
+
 ```bash
 postStartCommand: /bin/bash .devcontainer/scripts/post-start.sh
+```
+
+The C# container uses:
+
+```bash
+postStartCommand: /bin/bash .devcontainer/csharp/post-start.sh
 ```
 
 By default, the cloned repo lives at:
@@ -50,6 +58,12 @@ The startup setup includes:
 
 ```bash
 /bin/bash .devcontainer/scripts/post-start.sh
+```
+
+In the C# container, startup also runs:
+
+```bash
+/bin/bash .devcontainer/csharp/post-start.sh
 ```
 
 You can verify the install inside the container:
@@ -108,6 +122,8 @@ Create a Dockerfile for this service
 
 If you are using the C# container, you can also use the built-in .NET tooling and C# editor extensions for general C# development.
 
+The C# container also auto-activates the `dotnet-service` profile unless you have intentionally switched to a different active profile already.
+
 ## References
 
 - [Codex CLI docs](https://developers.openai.com/codex/cli)
@@ -121,3 +137,15 @@ This repository also includes repo-level profile documentation:
 - [profiles/dotnet-service/README.md](profiles/dotnet-service/README.md) for the `.NET` service profile
 
 Profiles are a repo convention that combine the right devcontainer, the right project-local agents, and optional future skills.
+
+To activate a profile and sync the correct active agents into [`.codex/agents/`](.codex/agents), run:
+
+```bash
+./scripts/activate-profile.sh dotnet-service
+```
+
+To list available profiles, run:
+
+```bash
+./scripts/activate-profile.sh --list
+```
