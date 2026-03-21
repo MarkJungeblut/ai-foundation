@@ -1,8 +1,13 @@
 # AI Foundation
 
-## Use Codex CLI In The Dev Container
+## Use The Dev Containers
 
-This repository includes a development container in [`.devcontainer/devcontainer.json`](.devcontainer/devcontainer.json). When the container is created, it installs the OpenAI Codex CLI with `npm install -g @openai/codex`. Each time the container starts, it prepares `https://github.com/VoltAgent/awesome-codex-subagents.git` directly inside the workspace at `$CODEX_SUBAGENTS_DIR`.
+This repository includes two development container configurations:
+
+- [`.devcontainer/devcontainer.json`](.devcontainer/devcontainer.json) for the default general-purpose setup
+- [`.devcontainer/csharp/devcontainer.json`](.devcontainer/csharp/devcontainer.json) for C# development with the .NET SDK and C# editor support
+
+Both containers share the same lifecycle scripts. When a container is created, it installs the OpenAI Codex CLI with `npm install -g @openai/codex`. Each time a container starts, it prepares `https://github.com/VoltAgent/awesome-codex-subagents.git` directly inside the workspace at `$CODEX_SUBAGENTS_DIR`.
 
 ### 1. Open the project in the dev container
 
@@ -10,14 +15,16 @@ Use any editor that supports Dev Containers, then open this repository in the co
 
 Common flows:
 
-- VS Code: `Dev Containers: Reopen in Container`
-- Cursor: reopen the folder in the dev container
+- VS Code: `Dev Containers: Reopen in Container` for the default environment
+- VS Code: choose the C# configuration when prompted if you want the .NET-focused environment
+- Cursor: reopen the folder in the dev container and choose the matching configuration if prompted
+- GitHub Codespaces: create a new codespace and select the C# devcontainer configuration when you want the .NET-focused environment
 
-The container uses Ubuntu 24.04 and Node.js 22.
+The default container uses Ubuntu 24.04 and Node.js 22. The C# container adds the official `.NET` devcontainer feature with the latest LTS SDK, while keeping Node.js 22 and the same Codex workflow.
 
 ### 2. Wait for the container setup to finish
 
-The container uses two lifecycle steps:
+Both containers use the same two lifecycle steps:
 
 ```bash
 postCreateCommand: /bin/bash .devcontainer/scripts/post-create.sh
@@ -49,6 +56,12 @@ You can verify the install inside the container:
 
 ```bash
 codex --version
+```
+
+In the C# container, you can also verify the .NET SDK:
+
+```bash
+dotnet --info
 ```
 
 ### 3. Start Codex
@@ -92,6 +105,8 @@ Explain the project structure
 ```text
 Create a Dockerfile for this service
 ```
+
+If you are using the C# container, you can also use the built-in .NET tooling and C# editor extensions for general C# development.
 
 ## References
 
