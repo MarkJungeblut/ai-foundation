@@ -2,11 +2,14 @@
 
 set -euo pipefail
 
-repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-active_profile_file="$repo_root/.codex/ACTIVE_PROFILE"
+# `pwd` prints the absolute path after changing into the script directory.
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+repo_root="$(cd "$script_dir/../.." && pwd)"
 target_profile="dotnet-service"
 
 /bin/bash "$repo_root/.devcontainer/scripts/post-start.sh"
+
+active_profile_file="$repo_root/.codex/ACTIVE_PROFILE"
 
 if [[ ! -f "$active_profile_file" ]]; then
   /bin/bash "$repo_root/scripts/activate-profile.sh" "$target_profile"
