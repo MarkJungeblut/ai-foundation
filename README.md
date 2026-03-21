@@ -112,3 +112,12 @@ If you are using the C# container, you can also use the built-in .NET tooling an
 
 - [Codex CLI docs](https://developers.openai.com/codex/cli)
 - [OpenAI Codex repository](https://github.com/openai/codex)
+
+## Profiles
+
+This repository also includes repo-level profile documentation:
+
+- [profiles/_baseline/README.md](profiles/_baseline/README.md) for the shared delivery baseline
+- [profiles/dotnet-service/README.md](profiles/dotnet-service/README.md) for the `.NET` service profile
+
+Profiles are a repo convention that combine the right devcontainer, the right project-local agents, and optional future skills.
