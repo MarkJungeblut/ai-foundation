@@ -6,8 +6,9 @@ This repository includes two development container configurations:
 
 - [`.devcontainer/devcontainer.json`](.devcontainer/devcontainer.json) for the default general-purpose setup
 - [`.devcontainer/csharp/devcontainer.json`](.devcontainer/csharp/devcontainer.json) for C# development with the .NET SDK and C# editor support
+- [`.devcontainer/react-fullstack/devcontainer.json`](.devcontainer/react-fullstack/devcontainer.json) for Next.js-based React fullstack development with Node.js 22
 
-Both containers share the same create-time setup. On startup, the default container runs the shared startup script, while the C# container runs a C#-specific startup wrapper that also activates the `dotnet-service` profile when appropriate. Both still prepare `https://github.com/VoltAgent/awesome-codex-subagents.git` directly inside the workspace at `$CODEX_SUBAGENTS_DIR`.
+All containers share the same create-time setup. On startup, the default container runs the shared startup script, while the C# and React fullstack containers run profile-specific startup wrappers that also activate their matching profiles when appropriate. All of them still prepare `https://github.com/VoltAgent/awesome-codex-subagents.git` directly inside the workspace at `$CODEX_SUBAGENTS_DIR`.
 
 ### 1. Open the project in the dev container
 
@@ -17,10 +18,11 @@ Common flows:
 
 - VS Code: `Dev Containers: Reopen in Container` for the default environment
 - VS Code: choose the C# configuration when prompted if you want the .NET-focused environment
+- VS Code: choose the React fullstack configuration when prompted if you want the Next.js-focused environment
 - Cursor: reopen the folder in the dev container and choose the matching configuration if prompted
-- GitHub Codespaces: create a new codespace and select the C# devcontainer configuration when you want the .NET-focused environment
+- GitHub Codespaces: create a new codespace and select the C# or React fullstack devcontainer configuration when you want a profile-specific environment
 
-The default container uses Ubuntu 24.04 and Node.js 22. The C# container adds the official `.NET` devcontainer feature with the latest LTS SDK, while keeping Node.js 22 and the same Codex workflow.
+The default container uses Ubuntu 24.04 and Node.js 22. The C# container adds the official `.NET` devcontainer feature with the latest LTS SDK, while keeping Node.js 22 and the same Codex workflow. The React fullstack container keeps Node.js 22 and adds editor extensions for ESLint, Prettier, and Tailwind CSS.
 
 ### 2. Wait for the container setup to finish
 
@@ -40,6 +42,12 @@ The C# container uses:
 
 ```bash
 postStartCommand: /bin/bash .devcontainer/csharp/post-start.sh
+```
+
+The React fullstack container uses:
+
+```bash
+postStartCommand: /bin/bash .devcontainer/react-fullstack/post-start.sh
 ```
 
 By default, the cloned repo lives at:
@@ -66,6 +74,12 @@ In the C# container, startup also runs:
 /bin/bash .devcontainer/csharp/post-start.sh
 ```
 
+In the React fullstack container, startup also runs:
+
+```bash
+/bin/bash .devcontainer/react-fullstack/post-start.sh
+```
+
 You can verify the install inside the container:
 
 ```bash
@@ -76,6 +90,12 @@ In the C# container, you can also verify the .NET SDK:
 
 ```bash
 dotnet --info
+```
+
+In the React fullstack container, you can verify Node.js tooling:
+
+```bash
+node --version
 ```
 
 ### 3. Start Codex
@@ -124,6 +144,10 @@ If you are using the C# container, you can also use the built-in .NET tooling an
 
 The C# container also auto-activates the `dotnet-service` profile unless you have intentionally switched to a different active profile already.
 
+If you are using the React fullstack container, you can use the Node.js setup and frontend-focused editor extensions for Next.js and TypeScript development.
+
+The React fullstack container also auto-activates the `react-fullstack` profile unless you have intentionally switched to a different active profile already.
+
 ## References
 
 - [Codex CLI docs](https://developers.openai.com/codex/cli)
@@ -135,6 +159,7 @@ This repository also includes repo-level profile documentation:
 
 - [profiles/_baseline/README.md](profiles/_baseline/README.md) for the shared delivery baseline
 - [profiles/dotnet-service/README.md](profiles/dotnet-service/README.md) for the `.NET` service profile
+- [profiles/react-fullstack/README.md](profiles/react-fullstack/README.md) for the Next.js-based React fullstack profile
 
 Profiles are a repo convention that combine the right devcontainer, the right project-local agents, and optional future skills.
 
@@ -142,6 +167,10 @@ To activate a profile and sync the correct active agents into [`.codex/agents/`]
 
 ```bash
 ./scripts/activate-profile.sh dotnet-service
+```
+
+```bash
+./scripts/activate-profile.sh react-fullstack
 ```
 
 To list available profiles, run:
