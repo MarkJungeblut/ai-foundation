@@ -19,6 +19,7 @@ These rules apply as the default working contract for all agents and profiles in
 - Prefer the smallest safe change that solves the task.
 - Follow existing project patterns unless there is a clear reason not to.
 - For non-trivial work, define success criteria before implementation.
+- At the end of a non-trivial task, create or update a short summary in `docs/task-summaries/` using the template and the `YYYY-MM-DD-short-task-name.md` naming convention.
 
 ## Notes
 
