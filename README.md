@@ -35,6 +35,7 @@ node --version  # React fullstack container
 - Begin with a clear goal, relevant file paths, and any important constraints or preferences.
 - Use planning before implementation for non-trivial, cross-cutting, or higher-risk changes.
 - Keep requests bounded so verification and handoff stay easy to understand.
+- When resuming work, load the latest committed handoff note with `$check-last-summary`.
 - Ask Codex to run the smallest relevant verification for the change.
 - When a non-trivial task is done, create a committed handoff note with `$create-summary`.
 
@@ -75,6 +76,7 @@ Task handoff notes:
 - Store committed per-task thread summaries in [docs/task-summaries/](docs/task-summaries/)
 - Use the template at [docs/task-summaries/_template.md](docs/task-summaries/_template.md)
 - Name files as `YYYY-MM-DD-short-task-name.md`
+- Use `$check-last-summary` to reload the latest committed summary before resuming work
 - Use `$create-summary` to create a new summary for a completed non-trivial task
 
 More detail:
