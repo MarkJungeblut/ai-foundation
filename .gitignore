@@ -1,2 +1,3 @@
 .DS_Store
-awesome-codex-subagents/
+.codex/ACTIVE_PROFILE
+.codex/agents/*.toml

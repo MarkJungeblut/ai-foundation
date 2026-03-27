@@ -6,9 +6,6 @@
       "version": "22"
     }
   },
-  "remoteEnv": {
-    "CODEX_SUBAGENTS_DIR": "${containerWorkspaceFolder}/awesome-codex-subagents"
-  },
   "postCreateCommand": "/bin/bash .devcontainer/scripts/post-create.sh",
   "postStartCommand": "/bin/bash .devcontainer/react-fullstack/post-start.sh",
   "forwardPorts": [

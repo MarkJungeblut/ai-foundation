@@ -39,7 +39,7 @@ These agents are useful for narrower situations, but they are not part of the de
 - `performance-engineer`: use when runtime performance, rendering behavior, bundle size, or Core Web Vitals need direct focus
 - `tooling-engineer`: use when linting, formatting, CI, or workflow tooling needs direct ownership
 
-These optional agents remain available from the upstream catalog in `awesome-codex-subagents/` and can be pulled into `.codex/agents/` later if the repo needs them as active defaults.
+These optional agents are not vendored by default. If the repo starts depending on one as an active default, copy its reviewed TOML into a profile-owned `agents/` folder and update the profile definition in git.
 
 ## Expected Validation And Quality Gates
 
@@ -59,3 +59,5 @@ The exact command set depends on the concrete Next.js application, but the quali
 There is no dedicated `react-fullstack` skill in v1.
 
 If repeated procedural guidance starts showing up across multiple React or Next.js repos, add a `react-fullstack` skill later for shared workflow knowledge such as linting, testing, routing conventions, data fetching patterns, and deployment expectations.
+
+The required `nextjs-developer` agent for this profile is vendored under `profiles/react-fullstack/agents/` so activation stays self-contained.

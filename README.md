@@ -19,7 +19,7 @@ codex
 ./scripts/activate-profile.sh <profile-name>
 ```
 
-All containers share the same `postCreateCommand`, and the profile-specific containers run their own `postStartCommand` wrappers. The setup also prepares `awesome-codex-subagents` automatically and forwards port `1455` for the Codex auth callback flow.
+All containers share the same `postCreateCommand`, and the profile-specific containers run their own `postStartCommand` wrappers. The active profiles are self-contained in this repository and port `1455` is forwarded for the Codex auth callback flow.
 
 Useful verification commands inside the container:
 
@@ -79,11 +79,18 @@ Task handoff notes:
 - Use `$check-last-summary` to reload the latest committed summary before resuming work
 - Use `$create-summary` to create a new summary for a completed non-trivial task
 
+Runtime vs repo-owned state:
+
+- [`.agents/`](.agents/) contains repo-owned skills and prompts that are committed and shared.
+- [`.codex/`](.codex/) contains local generated runtime state such as the active profile marker and copied active-agent TOMLs.
+- Active profiles vendor only the agent definitions they require, so profile activation does not depend on a separate checkout at startup.
+
 More detail:
 
 - [profiles/_baseline/README.md](profiles/_baseline/README.md)
 - [profiles/dotnet-service/README.md](profiles/dotnet-service/README.md)
 - [profiles/react-fullstack/README.md](profiles/react-fullstack/README.md)
+- [docs/maintaining-agent-definitions.md](docs/maintaining-agent-definitions.md)
 
 ## References
 

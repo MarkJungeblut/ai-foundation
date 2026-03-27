@@ -2,11 +2,8 @@
 
 set -euo pipefail
 
-target="${CODEX_SUBAGENTS_DIR:-$(pwd)/awesome-codex-subagents}"
+# `pwd` prints the absolute path after changing into the script directory.
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+repo_root="$(cd "$script_dir/../.." && pwd)"
 
-if [ -d "$target/.git" ]; then
-  git -C "$target" pull --ff-only
-else
-  mkdir -p "$(dirname "$target")"
-  git clone https://github.com/VoltAgent/awesome-codex-subagents.git "$target"
-fi
+mkdir -p "$repo_root/.codex/agents"

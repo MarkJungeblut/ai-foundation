@@ -36,7 +36,7 @@ These agents are useful for narrower situations, but they are not part of the de
 - `backend-developer`: use when you want a more stack-agnostic backend implementation perspective
 - `api-designer`: use when contract design, compatibility, or API evolution is the primary concern
 
-These optional agents remain available from the upstream catalog in `awesome-codex-subagents/` and can be pulled into `.codex/agents/` later if the repo needs them as active defaults.
+These optional agents are not vendored by default. If the repo starts depending on one as an active default, copy its reviewed TOML into a profile-owned `agents/` folder and update the profile definition in git.
 
 ## Expected Validation And Quality Gates
 
@@ -56,3 +56,5 @@ The exact command set depends on the concrete `.NET` service, but the quality ba
 There is no dedicated `.NET` skill in v1.
 
 If repeated procedural guidance starts showing up across multiple `.NET` service repos, add a `dotnet-service` skill later for shared workflow knowledge such as build, test, publish, migrations, configuration, and service conventions.
+
+The required `dotnet-core-expert` agent for this profile is vendored under `profiles/dotnet-service/agents/` so activation stays self-contained.

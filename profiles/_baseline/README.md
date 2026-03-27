@@ -30,3 +30,5 @@ Every profile built on this baseline should expect the following checks to exist
 - SonarQube or equivalent quality-gate feedback must be reviewed where configured
 
 The exact commands can vary by technology, but the baseline expectation is stable across profiles even when `tooling-engineer` is only used on demand.
+
+The baseline ships with its required agent TOMLs vendored under `profiles/_baseline/agents/`, so activating a profile does not depend on any external catalog checkout.

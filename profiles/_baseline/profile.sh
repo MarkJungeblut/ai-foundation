@@ -1,7 +1,7 @@
 #!/bin/bash
 
 BASELINE_AGENT_SOURCES=(
-  "awesome-codex-subagents/categories/04-quality-security/security-auditor.toml"
-  "awesome-codex-subagents/categories/04-quality-security/code-reviewer.toml"
-  "awesome-codex-subagents/categories/04-quality-security/qa-expert.toml"
+  "profiles/_baseline/agents/security-auditor.toml"
+  "profiles/_baseline/agents/code-reviewer.toml"
+  "profiles/_baseline/agents/qa-expert.toml"
 )
